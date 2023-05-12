@@ -2,10 +2,13 @@ class ConversationsController < ApplicationController
     # Sebelum masuk kedalam conversation user harus login/authenticate dahulu dan hanya bisa melihat conversation saja
     before_action :authenticate, only: [:show]
 
+
     def index
         conversations = Conversation.preload(:messages).show_conversations(@current_user.id)
         conversations.each do |conversation|
+            # fitur 4.a last message
           conversation[:last_message] = conversation.messages.last
+            # fitur 4.b unread message
           conversation[:unread] = unread_messages(conversation, @current_user.id).length
     end
     json_response(conversation)

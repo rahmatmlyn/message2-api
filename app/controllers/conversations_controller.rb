@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-    # Sebelum masuk kedalam conversation user harus login/authenticate dahulu dan hanya bisa melihat conversation saja
+    # Sebelum melakukan aksi kita harus men set receiver terlebih dahulu, dan hannya bisa melihat saja dalam conversation ini
     before_action :set_receiver, only: [:show]
 
 

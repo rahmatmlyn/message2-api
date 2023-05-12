@@ -5,10 +5,8 @@ Rails.application.routes.draw do
   get 'viewuser', to: 'users#index'
   post 'signup', to: 'users#create'
 
-  belongs_to :conversation
-  belongs_to :user
 
-  validates_presence_of :body, :conversation_id, :user_id
+
   # dalam conversation hannya bisa melihat index/ isi conversationnya saja
   resources :conversations, only: [:index, :show]
   # dalam message hannya bisa melihat message dan membuat message

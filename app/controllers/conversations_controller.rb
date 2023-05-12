@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
     # Sebelum masuk kedalam conversation user harus login/authenticate dahulu dan hanya bisa melihat conversation saja
-    before_action :authenticate, only: [:show]
+    before_action :set_receiver, only: [:show]
 
 
     def index
@@ -10,8 +10,9 @@ class ConversationsController < ApplicationController
           conversation[:last_message] = conversation.messages.last
             # fitur 4.b unread message
           conversation[:unread] = unread_messages(conversation, @current_user.id).length
+            end
+        json_response(conversation)
     end
-    json_response(conversation)
 
 
     def show
@@ -31,7 +32,7 @@ class ConversationsController < ApplicationController
         end
 
         def unread_messages(conversations, user_id)
-            conversations.messages.where.not(user_id:).where(read: false)
+            conversations.messages.where.not(user_id: user_id).where(read: false)
         end
     
 end

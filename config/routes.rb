@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'login', to: 'authentication#authenticate'
   get 'viewuser', to: 'users#index'
   post 'signup', to: 'users#create'
+  get 'viewconversation', to: 'conversations#index'
 
 
 

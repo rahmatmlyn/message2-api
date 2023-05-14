@@ -6,8 +6,8 @@ class Conversation < ApplicationRecord
     attribute :last_message
     attribute :unread
 
-    #scope :show_conversations, lambda { |sender_id|
-     #   where ('sender_id = ? OR receiver_id = ?', sender_id, sender_id).order(updated_at: :desc)}
+    scope :show_conversations, lambda { |sender_id|
+      where('sender_id = ? OR receiver_id = ?', sender_id, sender_id).order(updated_at: :desc)}
 
       def self.show_messages(sender_id, receiver_id)
         where('(sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)',

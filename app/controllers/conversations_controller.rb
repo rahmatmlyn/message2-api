@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
             # fitur 4.b unread message
           conversation[:unread] = unread_messages(conversation, @current_user.id).length
             end
-        json_response(conversation)
+        json_response(conversations)
     end
 
 

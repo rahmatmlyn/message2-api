@@ -4,6 +4,7 @@ class ConversationsController < ApplicationController
 
 
     def index
+      # untuk melihat pesan terakhir dan keterangan di pesan tersebut seperti sudah dibaca atau belum
         conversations = Conversation.preload(:messages).show_conversations(@current_user.id)
         conversations.each do |conversation|
             # fitur 4.a last message
@@ -14,11 +15,13 @@ class ConversationsController < ApplicationController
         json_response(conversations)
     end
 
-
+    # fitur untuk membuka conv, berdasarkan id user yang dituju
     def show
         conversation = Conversation.show_messages(@current_user.id, @receiver.id)
-    
+        # ketika membuka conv, conv akan diurutkan berdasarkan descending atau yang value terbesar berada diatas disini yang dimaksud adalah pesan terbaru
         messages = conversation.messages.order(created_at: :desc).page params[:page]
+
+        # merubah table read menjadi true
         unread_messages = unread_messages(conversation, @current_user.id)
         unread_messages.update_all(read: true)
     

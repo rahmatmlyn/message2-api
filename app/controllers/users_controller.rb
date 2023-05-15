@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # routes viewuser
   def index
+    # menampilkan semua user yanh sudah dibuat
     users = User.where.not(id: @current_user.id)
     json_response(users)
   end
